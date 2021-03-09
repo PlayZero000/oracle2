@@ -66,14 +66,20 @@ HAVING d.department_name in ('IT','Sales');
 #自定义查询
 
 
-改动原因:由于只需要查询两个部门('IT'和'Sales')的部门总人数和平均工资，所以去掉查询d.department_name
+#改动原因:
+ 1 ORACLE的解析器按照从右到左的顺序处理FROM子句中的表名,因此FROM子句中写在最后的表将被最先处理. 在FROM子句中包含多个表的情况下,选择记录条数最少的表作为基础表可以提高程序执行的效率.由于员工表employees中的数据较多，所以放在左边。
 
+ 2 ORACLE采用自下而上的顺序解析WHERE子句,根据这个原理,表之间的连接必须写在其他WHERE条件之前, 那些可以过滤掉最大数量记录的条件必须写在WHERE子句的末尾.
+
+
+语句:
 SELECT d.department_name,count(e.job_id)as "部门总人数",
 avg(e.salary)as "平均工资"
-FROM hr.departments d,hr.employees e
+FROM hr.employees e，hr.departments d
 WHERE d.department_id = e.department_id
-GROUP BY d.department_name
-HAVING d.department_name in ('IT','Sales');
+HAVING d.department_name in ('IT','Sales')
+GROUP BY d.department_name;
+
     
 ##执行效果
 
