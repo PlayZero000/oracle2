@@ -32,6 +32,8 @@
     GROUP BY d.department_name;
     
 ##执行效果
+
+
 ![](./assit/2.png)
 
 
@@ -52,6 +54,8 @@ GROUP BY d.department_name
 HAVING d.department_name in ('IT','Sales');
     
 ##执行效果
+
+
 ![](./assit/1.png)
 
 
@@ -72,6 +76,8 @@ GROUP BY d.department_name
 HAVING d.department_name in ('IT','Sales');
     
 ##执行效果
+
+
 ![](./assit/3.png)
 
 
